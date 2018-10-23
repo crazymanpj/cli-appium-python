@@ -4,7 +4,7 @@
 # Author:  pangjian
 import subprocess
 
-class Server():
+class Server(object):
 
     def __init__(self):
         self.IP = '127.0.0.1'
