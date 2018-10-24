@@ -45,16 +45,16 @@ class AdbHelper(object):
 
     def getPlatformVersion(self):
         cmd = 'adb shell getprop ro.build.version.release'
-        return os.popen(cmd).read()
+        return os.popen(cmd).read().strip('\n')
 
     def getDeviceName(self):
         cmd = 'adb get-serialno'
         # cmd2 = 'adb shell getprop ro.serialno'
-        return os.popen(cmd).read()
+        return os.popen(cmd).read().strip('\n')
 
     def getMobilePhoneModel(self):
         cmd = 'adb -d shell getprop ro.product.model'
-        return os.popen(cmd).read()
+        return os.popen(cmd).read().strip('\n')
 
     def getPhoneResolution(self):
         cmd = 'adb shell "dumpsys window | grep mUnrestrictedScreen"'
