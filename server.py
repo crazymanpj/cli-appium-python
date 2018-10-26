@@ -2,14 +2,16 @@
 # encoding=utf-8
 # Date:    2018-10-18
 # Author:  pangjian
-import subprocess
+import subprocess,time,os
+from adbhelper import AdbHelper
 
 class Server(object):
 
     def __init__(self):
+        self.my_adbhelper = AdbHelper()
         self.IP = '127.0.0.1'
         self.port = '4723'
-        self.deviceId = '26eda776'
+        self.deviceId = self.my_adbhelper.getDeviceName()
         self.subp = None
 
     def start(self):
@@ -18,7 +20,16 @@ class Server(object):
         #log 启动appium服务成功
         self.subp = subprocess.Popen(cmd, shell=True)
 
+    def killNodePro(self):
+        cmd = 'taskkill /f /im node.exe'
+        s = subprocess.Popen(cmd, shell=True)
+        s.wait()
+        s.kill()
+
     def stop(self):
+        print('stop')
+        #windows
+        self.killNodePro()
         if self.subp is not None:
             #log 关闭appium服务
             self.subp.kill()

@@ -22,7 +22,7 @@ class Runner(object):
         desired_caps['deviceName'] = self.my_adbhelper.getDeviceName()
         desired_caps['appPackage'] = self.my_androidhelper.packagename
         desired_caps['appActivity'] = self.my_androidhelper.appActivity
-        desired_caps['apk'] = self.getTestApk()
+        desired_caps['app'] = self.getTestApk()
         print(desired_caps)
         with open('config.json', 'w') as f:
             json.dump(desired_caps, f)
@@ -36,7 +36,7 @@ class Runner(object):
         print('tt1')
         suite = unittest.TestLoader().loadTestsFromTestCase(MomentTest)
 
-        with open('UnitestTextReport.txt', 'a') as f:
+        with open('UnitestTextReport.txt', 'w') as f:
             runner = unittest.TextTestRunner(stream=f, verbosity=2)
             runner.run(suite)
 
