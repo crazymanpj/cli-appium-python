@@ -11,3 +11,7 @@ def nav_my(d):
 
 def nav_sub_shequ(d):
     d.find_element_by_xpath("//android.widget.TextView[@text='我的社区']").click()
+
+def nav_common(d, navtext):
+    xpath_text = "//android.widget.TextView[@text='%s']"%(navtext)
+    d.find_element_by_xpath(xpath_text).click()

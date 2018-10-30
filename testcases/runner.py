@@ -35,7 +35,6 @@ class Runner(object):
         s = Server()
         s.start()
         desired_caps = self.inittest()
-        print('tt1')
         suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)
 
         with open('UnitestTextReport.txt', 'w') as f:

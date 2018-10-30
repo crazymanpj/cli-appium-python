@@ -18,7 +18,8 @@ class Server(object):
         #log 启动appium服务
         cmd = "appium -a %s -p %s -U %s --session-override"%(self.IP, self.port, self.deviceId)
         #log 启动appium服务成功
-        self.subp = subprocess.Popen(cmd, shell=True)
+        with open('myappium.txt', 'w') as f:
+            self.subp = subprocess.Popen(cmd, shell=True, stdout=f)
 
     def killNodePro(self):
         cmd = 'taskkill /f /im node.exe'
