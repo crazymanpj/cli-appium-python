@@ -17,7 +17,6 @@ class AndroidHelper(object):
 
     def getApkInfo(self):
         aaptPath = os.path.join(PROJECTPATH, 'tool', "aapt.exe")
-        print(aaptPath)
         if os.path.exists(aaptPath) == 0:
             return
         versioncode = ""

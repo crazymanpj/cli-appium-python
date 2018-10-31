@@ -4,6 +4,9 @@
 # Author:  pangjian
 import subprocess,time,os
 from adbhelper import AdbHelper
+from log import Log
+
+logger = Log.get_logger()
 
 class Server(object):
 
@@ -15,10 +18,10 @@ class Server(object):
         self.subp = None
 
     def start(self):
-        #log 启动appium服务
+        logger.info('启动appium服务')
         cmd = "appium -a %s -p %s -U %s --session-override"%(self.IP, self.port, self.deviceId)
-        #log 启动appium服务成功
-        with open('myappium.txt', 'w') as f:
+        logger.info('启动appium服务成功')
+        with open('myappiumserver.txt', 'w') as f:
             self.subp = subprocess.Popen(cmd, shell=True, stdout=f)
 
     def killNodePro(self):
@@ -32,9 +35,9 @@ class Server(object):
         #windows
         self.killNodePro()
         if self.subp is not None:
-            #log 关闭appium服务
+            logger.info('关闭appium服务')
             self.subp.kill()
-            #log 关闭appium服务成功
+            logger.info('关闭appium服务成功')
 
     def __del__(self):
         pass

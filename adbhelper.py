@@ -7,7 +7,6 @@ from androidhelper import AndroidHelper
 import os
 
 PROJECTPATH = os.getcwd()
-print(PROJECTPATH)
 
 class AdbHelper(object):
 
