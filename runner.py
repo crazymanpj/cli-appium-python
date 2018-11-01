@@ -9,7 +9,7 @@ from testcases.gamemaster_test import CommonTest
 from server import Server
 from log import Log
 
-logger = Log.get_logger()
+logger = Log.get_logger(__name__)
 
 class Runner(object):
 
@@ -27,6 +27,7 @@ class Runner(object):
         desired_caps['appActivity'] = self.my_androidhelper.appActivity
         desired_caps['app'] = self.getTestApk()
         if self.isHigherAndroid(desired_caps['platformVersion']) == True:
+            logger.warn('hight android system, use uiautomator2')
             desired_caps['automationName'] = 'uiautomator2'
 
         logger.info(desired_caps)

@@ -8,8 +8,8 @@ import logging
 class Log():
 
     @classmethod
-    def get_logger(cls):
-        return logging.getLogger(__name__)
+    def get_logger(cls, name=__name__):
+        return logging.getLogger(name)
 
     @classmethod
     def set_log_level(cls, loglevel):

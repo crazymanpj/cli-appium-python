@@ -8,26 +8,26 @@ from testcases import appium_util,gamemaster_util
 from testcases.testcasehelper import initAppium
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import NoSuchElementException
+from log import Log
+logger = Log.get_logger(__name__)
 # import appium_util,gamemaster_util
 # from testcasehelper import initAppium
 
 
 class CommonTest(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.driver = initAppium()
-
-
     def setUp(self):
-        ID_WELCOME_TIP = "com.cmcm.gamemaster.main:id/guide_submit_iv"
-        self.driver.find_element_by_id(ID_WELCOME_TIP).click()
+        self.driver = initAppium()
+        time.sleep(10)
+        ID_WELCOME_TIP = "com.cmcm.gamemaster.main:id/guide_content_ly"
         self.driver.implicitly_wait(30)
-        self.driver.find_element_by_id(ID_WELCOME_TIP).click()
+        self.driver.find_element_by_id('com.cmcm.gamemaster.main:id/guide_icon_iv').click()
         self.driver.implicitly_wait(30)
-        print('setup end')
+        self.driver.find_element_by_id('com.cmcm.gamemaster.main:id/guide_icon_iv').click()
+        self.driver.implicitly_wait(30)
+        logger.info('setup end')
 
-    def dtest01_view_information_flow(self):
+    def test01_view_information_flow(self):
         time.sleep(5)
         print('start test01_view_information_flow')
         gamemaster_util.nav_shequ(self.driver)
@@ -66,7 +66,7 @@ class CommonTest(unittest.TestCase):
 
         assert kj is not None
 
-    def dtest02_publish(self):
+    def test02_publish(self):
         self.login()
         gamemaster_util.nav_shequ(self.driver)
         time.sleep(5)
@@ -134,7 +134,7 @@ class CommonTest(unittest.TestCase):
         self.driver.implicitly_wait(30)
 
 
-    def dtest03_videoplay(self):
+    def test03_videoplay(self):
         print('start')
         gamemaster_util.nav_shequ(self.driver)
         print('end')
@@ -151,7 +151,7 @@ class CommonTest(unittest.TestCase):
         else:
             return False
 
-    def dtest04_login_logout(self):
+    def test04_login_logout(self):
         self.login()
         time.sleep(5)
         self.logout()
@@ -161,10 +161,8 @@ class CommonTest(unittest.TestCase):
         gamemaster_util.nav_common(self.driver, ID_TEXT)
         time.sleep(5)
 
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
+    def tearDown(self):
+        self.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()
