@@ -5,11 +5,12 @@
 import os,unittest,json
 from androidhelper import AndroidHelper
 from adbhelper import AdbHelper
-from testcases.gamemaster_test import CommonTest
+from testcases.test_gamemaster import CommonTest
 from server import Server
 from log import Log
 
 logger = Log.get_logger(__name__)
+PROJECTPATH = os.getcwd()
 
 class Runner(object):
 
@@ -36,16 +37,18 @@ class Runner(object):
 
     def runTestCase(self):
         apkpath = self.getTestApk()
+        testpath = os.path.join(PROJECTPATH, 'testcases')
         logger.info(apkpath)
         self.my_androidhelper = AndroidHelper(apkpath)
         s = Server()
         s.start()
         desired_caps = self.inittest()
-        suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)
+        # suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)
+        discover = unittest.defaultTestLoader.discover(testpath, pattern='test*.py')
 
         with open('UnitestTextReport.txt', 'w') as f:
             runner = unittest.TextTestRunner(stream=f, verbosity=2)
-            runner.run(suite)
+            runner.run(discover)
 
         s.stop()
 
