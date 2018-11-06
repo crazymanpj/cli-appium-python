@@ -5,7 +5,6 @@
 import os,unittest,json
 from androidhelper import AndroidHelper
 from adbhelper import AdbHelper
-from testcases.test_gamemaster import CommonTest
 from server import Server
 from log import Log
 
@@ -35,12 +34,12 @@ class Runner(object):
         with open('config.json', 'w') as f:
             json.dump(desired_caps, f)
 
-    def runTestCase(self):
+    def runTestCase(self, isnoreset=False):
         apkpath = self.getTestApk()
         testpath = os.path.join(PROJECTPATH, 'testcases')
         logger.info(apkpath)
         self.my_androidhelper = AndroidHelper(apkpath)
-        s = Server()
+        s = Server(isnoreset=isnoreset)
         s.start()
         desired_caps = self.inittest()
         # suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)

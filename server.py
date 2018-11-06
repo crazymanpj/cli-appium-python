@@ -10,20 +10,26 @@ logger = Log.get_logger(__name__)
 
 class Server(object):
 
-    def __init__(self):
+    def __init__(self, isnoreset=False):
         self.my_adbhelper = AdbHelper()
         self.IP = '127.0.0.1'
         self.port = '4723'
         self.deviceId = self.my_adbhelper.getDeviceName()
         self.subp = None
+        self.isnoreset = ''
+        logger.info('isnoreset: ' + str(isnoreset))
+        if isnoreset:
+            self.isnoreset = '--no-reset'
 
     def start(self):
         logger.info('启动appium服务')
-        cmd = "appium -a %s -p %s -U %s --session-override"%(self.IP, self.port, self.deviceId)
+        cmd = "appium -a %s -p %s -U %s --session-override %s"%(self.IP, self.port, self.deviceId, self.isnoreset)
+        logger.info(cmd)
 
         with open('myappiumserver.txt', 'w') as f:
             self.subp = subprocess.Popen(cmd, shell=True, stdout=f)
 
+        time.sleep(10)
         if self.isServerStartOk():
             logger.info('启动appium服务成功')
         else:
