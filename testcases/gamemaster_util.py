@@ -57,6 +57,7 @@ def logout(d):
 
 def islogin(d):
     ID_FIGHT_BUTTON = 'com.cmcm.gamemaster.account:id/account_fight_button'
+    time.sleep(1)
     nav_my(d)
     try:
         fight = d.find_element_by_id(ID_FIGHT_BUTTON)
