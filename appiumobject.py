@@ -20,8 +20,14 @@ LOCATOR_LIST = {
 
 class AppiumObject():
 
-    def __init__(self, driver, **kwargs):
+    def __init__(self, driver):
         self.driver = driver
+        self.driver.implicitly_wait(30)
+
+
+class AppiumElement():
+
+    def __init__(self, **kwargs):
         self.m = By.ID
         self.value = ''
 
@@ -29,10 +35,9 @@ class AppiumObject():
             self.m = LOCATOR_LIST[method]
             self.v = value
 
-    def find(self):
+    def find(self, driver):
         try:
-            element = self.driver.find_element(self.m, self.v)
-            self.driver.implicitly_wait(30)
+            element = driver.find_element(self.m, self.v)
             return element
         except NoSuchElementException as e:
             logger.warn('find element error')
@@ -40,9 +45,17 @@ class AppiumObject():
             return False
 
     def __get__(self, instance, owner):
-        return self.find()
+        return self.find(instance.driver)
 
+class AppiumElements(AppiumElement):
 
+    def find(self, driver):
+        try:
+            return driver.find_elements(self.m, self.v)
+        except NoSuchElementException as e:
+            logger.warn('find elements error')
+            logger.warn(str(e))
+            return False
 
 
 if __name__=='__main__':

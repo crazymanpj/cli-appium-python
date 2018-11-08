@@ -26,7 +26,7 @@ class Server(object):
         cmd = "appium -a %s -p %s -U %s --session-override %s"%(self.IP, self.port, self.deviceId, self.isnoreset)
         logger.info(cmd)
 
-        with open('myappiumserver.txt', 'w') as f:
+        with open('myappiumserver.txt', 'w', encoding='utf-8') as f:
             self.subp = subprocess.Popen(cmd, shell=True, stdout=f)
 
         time.sleep(10)

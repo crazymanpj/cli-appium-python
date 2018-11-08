@@ -45,7 +45,7 @@ class Runner(object):
         # suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)
         discover = unittest.defaultTestLoader.discover(testpath, pattern='test*.py')
 
-        with open('UnitestTextReport.txt', 'w') as f:
+        with open('UnitestTextReport.txt', 'w', encoding='utf-8') as f:
             runner = unittest.TextTestRunner(stream=f, verbosity=2)
             runner.run(discover)
 

@@ -15,6 +15,11 @@ def initAppium():
         # print(type(desired_caps))
         return webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 
+def virifyElement(element, isdisplay=True):
+    if isdisplay:
+        assert element is not False and element is not None
+    else:
+        assert element is False and element is None
 
 if __name__=='__main__':
     initAppium()
