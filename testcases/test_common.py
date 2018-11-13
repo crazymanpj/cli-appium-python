@@ -6,7 +6,7 @@ import unittest,os,time
 from appium_util import AppiumUtil
 from gmres import GMRes
 from testcases import gamemaster_util
-from testcases.testcasehelper import initAppium, virifyElement
+from testcases.testcasehelper import initAppium, verifyElement, initLogcat
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import NoSuchElementException
 from log import Log
@@ -19,6 +19,7 @@ class CommonTest(unittest.TestCase):
 
     def setUp(self):
         self.driver = initAppium()
+        initLogcat()
         self.gmres = GMRes(self.driver)
         try:
             for i in range(2):
@@ -32,38 +33,22 @@ class CommonTest(unittest.TestCase):
     def test01_view_information_flow(self):
         myappiumutil = AppiumUtil(self.driver)
         self.gmres.tab_moment.click()
-        time.sleep(3)
         myappiumutil.swipLeft()
         time.sleep(3)
         myappiumutil.swipeDown()
-        kj = None
-        time.sleep(3)
-        virifyElement(self.gmres.moment_rec_videos[0])
-
-        kj = None
+        verifyElement(self.gmres.moment_rec_videos[0])
         myappiumutil.swipRight()
-        time.sleep(3)
-        try:
-            kj = self.driver.find_element_by_id("com.cmcm.gamemaster.moment:id/tv_name")
-        except Exception as e:
-            pass
-        assert kj is not None
-        kj = None
+        verifyElement(self.gmres.planet_name)
         myappiumutil.swipRight()
-        time.sleep(5)
-        try:
-            kj = self.driver.find_element_by_id("com.cmcm.gamemaster.moment:id/iv_empty")
-        except Exception as e:
-            pass
+        verifyElement(self.gmres.moment_empty)
 
-        assert kj is not None
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
     def test02_publish(self):
         myappiumutil = AppiumUtil(self.driver)
-        if gamemaster_util.islogin(self.driver) is False:
+        if gamemaster_util.islogin(self.gmres) is False:
             logger.info('need login...')
-            gamemaster_util.login(self.driver)
+            gamemaster_util.login(self.gmres)
 
         self.gmres.tab_moment.click()
         self.gmres.moment_follow.click()
@@ -74,7 +59,6 @@ class CommonTest(unittest.TestCase):
         assert publishtext.text == "test"
         self.gmres.tab_my.click()
         myappiumutil.swipeUp()
-        time.sleep(3)
         self.gmres.moment_subtab.click()
         moment = self.gmres.moment_m_publist[0]
         myappiumutil.my_longpress(moment)
@@ -87,7 +71,6 @@ class CommonTest(unittest.TestCase):
     def test03_videoplay(self):
         myappiumutil = AppiumUtil(self.driver)
         self.gmres.tab_moment.click()
-        time.sleep(3)
         myappiumutil.swipLeft()
         videolist = self.gmres.moment_rec_videos
         if videolist[0].is_displayed() == True:
@@ -100,12 +83,10 @@ class CommonTest(unittest.TestCase):
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
     def test04_login_logout(self):
-        if gamemaster_util.islogin(self.driver):
-            gamemaster_util.logout(self.driver)
-        time.sleep(3)
-        gamemaster_util.login(self.driver)
-        time.sleep(5)
-        gamemaster_util.logout(self.driver)
+        if gamemaster_util.islogin(self.gmres):
+            gamemaster_util.logout(self.gmres, self.driver)
+        gamemaster_util.login(self.gmres)
+        gamemaster_util.logout(self.gmres, self.driver)
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
     def test05_videotab(self):

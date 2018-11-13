@@ -7,6 +7,7 @@ from androidhelper import AndroidHelper
 from adbhelper import AdbHelper
 from server import Server
 from log import Log
+import HTMLTestRunner
 
 logger = Log.get_logger(__name__)
 PROJECTPATH = os.getcwd()
@@ -39,15 +40,23 @@ class Runner(object):
         testpath = os.path.join(PROJECTPATH, 'testcases')
         logger.info(apkpath)
         self.my_androidhelper = AndroidHelper(apkpath)
+        reportfile = os.path.join(PROJECTPATH, 'report', 'report.html')
+
         s = Server(isnoreset=isnoreset)
         s.start()
         desired_caps = self.inittest()
         # suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)
         discover = unittest.defaultTestLoader.discover(testpath, pattern='test*.py')
 
-        with open('UnitestTextReport.txt', 'w', encoding='utf-8') as f:
-            runner = unittest.TextTestRunner(stream=f, verbosity=2)
+        with open(reportfile, 'wb') as f:
+            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='测试报告', description='用例执行情况：')
             runner.run(discover)
+
+        # with open('UnitestTextReport.txt', 'w', encoding='utf-8') as f:
+        #     runner = unittest.TextTestRunner(stream=f, verbosity=2)
+        #     runner.run(discover)
+
+
 
         s.stop()
 

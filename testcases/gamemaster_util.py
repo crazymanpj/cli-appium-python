@@ -8,59 +8,30 @@ from selenium.common.exceptions import NoSuchElementException
 from log import Log
 logger = Log.get_logger(__name__)
 
-def nav_shequ(d):
-    d.find_element_by_xpath("//android.widget.RadioButton[@text='社区']").click()
-
-def nav_my(d):
-    d.find_element_by_xpath("//android.widget.RadioButton[@text='我的']").click()
-
-def nav_sub_shequ(d):
-    d.find_element_by_xpath("//android.widget.TextView[@text='我的社区']").click()
-
-def nav_common(d, navtext):
-    xpath_text = "//android.widget.RadioButton[@text='%s']"%(navtext)
-    d.find_element_by_xpath(xpath_text).click()
-
-def login(d):
-    ID_QQ_LOGIN_TEXT = ['登录', '登 录']
-    time.sleep(5)
-    d.find_element_by_xpath("//android.widget.RadioButton[@text='我的']").click()
-    time.sleep(5)
-    d.implicitly_wait(30)
-    d.find_element_by_id("com.cmcm.gamemaster.account:id/tv_begin_game").click()
-    d.implicitly_wait(30)
-    d.find_element_by_id("com.cmcm.gamemaster.account:id/qq_button").click()
-    d.implicitly_wait(30)
+def login(gmres):
+    gmres.tab_my.click()
+    gmres.account_login_btn.click()
+    gmres.account_qq_loginbtn.click()
     try:
-        d.find_element_by_xpath("//android.widget.Button[@text='登录']").click()
+        gmres.account_qqbtn_confirm.click()
     except NoSuchElementException as e:
-        print('try other')
-        d.find_element_by_xpath("//android.widget.Button[@text='登 录']").click()
-        d.implicitly_wait(30)
+        gmres.account_qqbtn_confirm2.click()
 
-def logout(d):
+def logout(gmres, d):
     myappiumutil = AppiumUtil(d)
-    time.sleep(5)
-    #log
-    #sleep规范化
-    nav_my(d)
+    gmres.tab_my.click()
     time.sleep(3)
-    d.implicitly_wait(30)
     myappiumutil.swipeUp()
-    d.implicitly_wait(30)
-    d.find_element_by_id('com.cmcm.gamemaster.main:id/setting_item_view').click()
-    d.implicitly_wait(30)
-    d.find_element_by_id('com.cmcm.gamemaster.main:id/account_logout_button').click()
-    d.implicitly_wait(30)
-    d.find_element_by_id('com.cmcm.gamemaster.main:id/game_master_dialog_define_btn').click()
-    d.implicitly_wait(30)
+    time.sleep(3)
+    gmres.setting_btn.click()
+    gmres.setting_logout_btn.click()
+    gmres.setting_logout_confirm.click()
 
-def islogin(d):
-    ID_FIGHT_BUTTON = 'com.cmcm.gamemaster.account:id/account_fight_button'
-    time.sleep(1)
-    nav_my(d)
+
+def islogin(gmres):
+    gmres.tab_my.click()
     try:
-        fight = d.find_element_by_id(ID_FIGHT_BUTTON)
+        fight = gmres.account_fight_btn
         if fight:
             logger.info('已登录')
             return True
