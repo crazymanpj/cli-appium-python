@@ -12,10 +12,13 @@ def login(gmres):
     gmres.tab_my.click()
     gmres.account_login_btn.click()
     gmres.account_qq_loginbtn.click()
-    try:
+
+    if gmres.account_qqbtn_confirm is not False:
         gmres.account_qqbtn_confirm.click()
-    except NoSuchElementException as e:
+    elif gmres.account_qqbtn_confirm2 is not False:
         gmres.account_qqbtn_confirm2.click()
+    else:
+        logger.info('错误，找不到登录button')
 
 def logout(gmres, d):
     myappiumutil = AppiumUtil(d)

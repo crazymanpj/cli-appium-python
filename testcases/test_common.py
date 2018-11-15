@@ -21,6 +21,7 @@ class CommonTest(unittest.TestCase):
         self.driver = initAppium()
         initLogcat()
         self.gmres = GMRes(self.driver)
+
         try:
             for i in range(2):
                 self.gmres.welcomtip.click()
@@ -34,7 +35,6 @@ class CommonTest(unittest.TestCase):
         myappiumutil = AppiumUtil(self.driver)
         self.gmres.tab_moment.click()
         myappiumutil.swipLeft()
-        time.sleep(3)
         myappiumutil.swipeDown()
         verifyElement(self.gmres.moment_rec_videos[0])
         myappiumutil.swipRight()
