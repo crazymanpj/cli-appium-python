@@ -33,14 +33,16 @@ def logout(gmres, d):
 
 def islogin(gmres):
     gmres.tab_my.click()
+    if gmres.account_newuserwin_closebtn:
+        gmres.account_newuserwin_closebtn.click()
+
     try:
-        fight = gmres.account_fight_btn
-        if fight:
-            logger.info('已登录')
-            return True
-        else:
+        if gmres.account_login_btn:
             logger.info('未登录')
             return False
+        else:
+            logger.info('已登录')
+            return True
     except NoSuchElementException as e:
         logger.info(str(e))
         logger.info('异常，未登录')
