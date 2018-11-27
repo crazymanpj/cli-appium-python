@@ -21,10 +21,12 @@ class CommonTest(unittest.TestCase):
         self.driver = initAppium()
         initLogcat()
         self.gmres = GMRes(self.driver)
+        self.myappiumutil = AppiumUtil(self.driver)
 
         try:
             for i in range(2):
-                self.gmres.welcomtip.click()
+                if self.gmres.welcomtip:
+                    self.gmres.welcomtip.click()
             logger.info('setup end')
         except NoSuchElementException as e:
             logger.info('can not find welcome tip, skip')
@@ -32,20 +34,17 @@ class CommonTest(unittest.TestCase):
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
     def test01_view_information_flow(self):
-        myappiumutil = AppiumUtil(self.driver)
         self.gmres.tab_moment.click()
-        myappiumutil.swipLeft()
-        myappiumutil.swipeDown()
+        self.myappiumutil.swipLeft()
+        self.myappiumutil.swipeDown()
         verifyElement(self.gmres.moment_rec_videos[0])
-        myappiumutil.swipRight()
+        self.myappiumutil.swipRight()
         verifyElement(self.gmres.planet_name)
-        myappiumutil.swipRight()
-        verifyElement(self.gmres.moment_empty)
+        self.myappiumutil.swipRight()
 
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
     def test02_publish(self):
-        myappiumutil = AppiumUtil(self.driver)
         if gamemaster_util.islogin(self.gmres) is False:
             logger.info('need login...')
             gamemaster_util.login(self.gmres)
@@ -58,10 +57,10 @@ class CommonTest(unittest.TestCase):
         publishtext = self.gmres.moment_publish_list[0]
         assert publishtext.text == "test"
         self.gmres.tab_my.click()
-        myappiumutil.swipeUp()
+        self.myappiumutil.swipeUp()
         self.gmres.moment_subtab.click()
         moment = self.gmres.moment_m_publist[0]
-        myappiumutil.my_longpress(moment)
+        self.myappiumutil.my_longpress(moment)
         self.gmres.moment_delete.click()
         self.gmres.moment_del_confirm.click()
         # moment = self.driver.find_elements_by_id("com.cmcm.gamemaster.moment:id/feed_root_layout")[0]
@@ -69,9 +68,8 @@ class CommonTest(unittest.TestCase):
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
     def test03_videoplay(self):
-        myappiumutil = AppiumUtil(self.driver)
         self.gmres.tab_moment.click()
-        myappiumutil.swipLeft()
+        self.myappiumutil.swipLeft()
         videolist = self.gmres.moment_rec_videos
         if videolist[0].is_displayed() == True:
             video_playbtns = self.gmres.moment_video_playbtn
@@ -85,6 +83,7 @@ class CommonTest(unittest.TestCase):
     def test04_login_logout(self):
         if gamemaster_util.islogin(self.gmres):
             gamemaster_util.logout(self.gmres, self.driver)
+            self.myappiumutil.swipeDown()
         gamemaster_util.login(self.gmres)
         gamemaster_util.logout(self.gmres, self.driver)
 

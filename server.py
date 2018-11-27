@@ -17,14 +17,14 @@ class Server(object):
         self.deviceId = self.my_adbhelper.getDeviceName()
         self.subp = None
         self.isnoreset = ''
-        logger.info('isnoreset: ' + str(isnoreset))
+        logger.debug('isnoreset: ' + str(isnoreset))
         if isnoreset:
             self.isnoreset = '--no-reset'
 
     def start(self):
         logger.info('启动appium服务')
         cmd = "appium -a %s -p %s -U %s --session-override %s"%(self.IP, self.port, self.deviceId, self.isnoreset)
-        logger.info(cmd)
+        logger.debug(cmd)
 
         with open('myappiumserver.txt', 'w', encoding='utf-8') as f:
             self.subp = subprocess.Popen(cmd, shell=True, stdout=f)

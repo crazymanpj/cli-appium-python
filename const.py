@@ -5,3 +5,4 @@
 
 PLATFORMNAME = 'Android'
 APKPATH = '/apk'
+PICPATH ='/screenshots'
