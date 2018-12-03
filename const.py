@@ -4,5 +4,5 @@
 # Author:  pangjian
 
 PLATFORMNAME = 'Android'
-APKPATH = '/apk'
-PICPATH ='/screenshots'
+APKPATH = 'apk'
+PICPATH ='screenshots'

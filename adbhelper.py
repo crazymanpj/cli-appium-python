@@ -4,7 +4,7 @@
 # Author:  pangjian
 from const import PLATFORMNAME, APKPATH
 from androidhelper import AndroidHelper
-import os
+import os,time
 
 PROJECTPATH = os.getcwd()
 
@@ -58,6 +58,14 @@ class AdbHelper(object):
     def getPhoneResolution(self):
         cmd = 'adb shell "dumpsys window | grep mUnrestrictedScreen"'
         return os.popen(cmd).read().split()[1]
+
+    @classmethod
+    def screenShot(cls, savepath):
+        timestamp = time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime(time.time()))
+        os.popen("adb wait-for-device")
+        os.popen("adb shell screencap -p /data/local/tmp/tmp.png")
+        os.popen("adb pull /data/local/tmp/tmp.png " + os.path.join(savepath, timestamp + ".png"))
+        os.popen("adb shell rm /data/local/tmp/tmp.png")
 
 if __name__ == '__main__':
     a =AdbHelper()

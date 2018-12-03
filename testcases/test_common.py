@@ -6,7 +6,7 @@ import unittest,os,time
 from appium_util import AppiumUtil
 from gmres import GMRes
 from testcases import gamemaster_util
-from testcases.testcasehelper import initAppium, verifyElement, initLogcat
+from testcases.testcasehelper import initAppium, verifyElement, initLogcat, capture
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import NoSuchElementException
 from log import Log
@@ -33,6 +33,7 @@ class CommonTest(unittest.TestCase):
             return True
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
+    @capture
     def test01_view_information_flow(self):
         self.gmres.tab_moment.click()
         self.myappiumutil.swipLeft()
@@ -44,6 +45,7 @@ class CommonTest(unittest.TestCase):
 
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
+    @capture
     def test02_publish(self):
         if gamemaster_util.islogin(self.gmres) is False:
             logger.info('need login...')
@@ -67,6 +69,7 @@ class CommonTest(unittest.TestCase):
         #判断元素不在或第一个元素text不是test
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
+    @capture
     def test03_videoplay(self):
         self.gmres.tab_moment.click()
         self.myappiumutil.swipLeft()
@@ -80,6 +83,7 @@ class CommonTest(unittest.TestCase):
             return False
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
+    @capture
     def test04_login_logout(self):
         if gamemaster_util.islogin(self.gmres):
             gamemaster_util.logout(self.gmres, self.driver)
@@ -88,6 +92,7 @@ class CommonTest(unittest.TestCase):
         gamemaster_util.logout(self.gmres, self.driver)
 
     @unittest.skipIf(IS_DEBUG==True, u'debug模式跳过')
+    @capture
     def test05_videotab(self):
         self.gmres.tab_video.click()
         time.sleep(5)
