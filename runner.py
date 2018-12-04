@@ -2,12 +2,14 @@
 # encoding=utf-8
 # Date:    2018-10-18
 # Author:  pangjian
-import os,unittest,json
+import os,unittest,json,time
 from androidhelper import AndroidHelper
 from adbhelper import AdbHelper
 from server import Server
 from log import Log
 import HTMLTestRunner
+from per import PerTest
+from const import PROCESSUINAME
 
 logger = Log.get_logger(__name__)
 PROJECTPATH = os.getcwd()
@@ -35,7 +37,7 @@ class Runner(object):
         with open('config.json', 'w') as f:
             json.dump(desired_caps, f)
 
-    def runTestCase(self, isnoreset=False):
+    def runTestCase(self, isnoreset=False, ispertest = False):
         apkpath = self.getTestApk()
         testpath = os.path.join(PROJECTPATH, 'testcases')
         logger.info(apkpath)
@@ -45,11 +47,18 @@ class Runner(object):
         s = Server(isnoreset=isnoreset)
         s.start()
         desired_caps = self.inittest()
-        # suite = unittest.TestLoader().loadTestsFromTestCase(CommonTest)
+        logger.info('ispertest: ' + str(ispertest))
+        if ispertest:
+            pertest = PerTest(PROCESSUINAME)
+            pertest.startMon()
+            logger.info('per end')
+
         discover = unittest.defaultTestLoader.discover(testpath, pattern='test*.py')
 
+
+        logger.info('pertest.cpu_aver: ' + pertest.cpu_aver)
         with open(reportfile, 'wb') as f:
-            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='测试报告', description='用例执行情况：')
+            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='测试报告', description='用例执行情况：', cpuaver=pertest.cpu_aver)
             runner.run(discover)
 
         # with open('UnitestTextReport.txt', 'w', encoding='utf-8') as f:

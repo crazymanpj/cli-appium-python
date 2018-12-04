@@ -67,6 +67,26 @@ class AdbHelper(object):
         os.popen("adb pull /data/local/tmp/tmp.png " + os.path.join(savepath, timestamp + ".png"))
         os.popen("adb shell rm /data/local/tmp/tmp.png")
 
+    def getPssFromText(self, text):
+        pattern = '( +)(TOTAL)( +)(\d+)'
+        m = re.match(pattern, text)
+        return m.group(4)
+
+    @classmethod
+    def getMemory(cls, packageName):
+        cmd = 'adb shell dumpsys meminfo' + packageName
+        text = os.peopen(cmd).readlines()
+        for i in text:
+            if i.find('TOTAL') >= 0:
+                return cls.getPssFromText(i)
+    @classmethod
+    def getCpu(cls, packageName):
+        cmd = 'adb shell top -n 1 | findstr /E ' + packageName
+        text = os.popen(cmd).readlines()
+        if len(text) == 0:
+            return False
+        return text[0].split()[2]
+
 if __name__ == '__main__':
     a =AdbHelper()
     print(a.getPhoneResolution())
