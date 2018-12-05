@@ -96,7 +96,8 @@ import sys
 import time
 import unittest
 from xml.sax import saxutils
- 
+from log import Log
+logger = Log.get_logger(__name__)
  
 # ------------------------------------------------------------------------
 # The redirectors below are used to capture output during testing. Output
@@ -179,6 +180,9 @@ class Template_mixin(object):
  
     DEFAULT_TITLE = 'Unit Test Report'
     DEFAULT_DESCRIPTION = ''
+    DEFAULT_CPUAVER = ''
+    DEFAULT_MEMORYAVER = ''
+    DEFAULT_DATAUSE = ''
  
     # ------------------------------------------------------------------------
     # HTML Template
@@ -647,6 +651,47 @@ class HTMLTestRunner(Template_mixin):
         r = [(cls, rmap[cls]) for cls in classes]
         return r
  
+    def addPerdataToReport(self, cpuaver=None, mem_aver=None, dusage_rx=None, dusage_tx=None):
+        if cpuaver is None:
+            cpuaver = DEFAULT_CPUAVER
+        else:
+            dictcpuaver = ('CpuAverage', cpuaver + '%')
+            self.report_attrs.append(dictcpuaver)
+
+        if mem_aver is None:
+            mem_aver = DEFAULT_MEMORYAVER
+        else:
+            dictmemaver = ('MemAverage', mem_aver + 'MB')
+            self.report_attrs.append(dictmemaver)
+
+        if dusage_rx is None:
+            dusage_rx = DEFAULT_DATAUSE
+        else:
+            dictdusage_rx = ('DataUsage 接收', dusage_rx + 'MB')
+            self.report_attrs.append(dictdusage_rx)
+
+        if dusage_tx is None:
+            dusage_tx = DEFAULT_DATAUSE
+        else:
+            dictdusage_tx = ('DataUsage 传输', dusage_tx + 'MB')
+            self.report_attrs.append(dictdusage_tx)
+
+        self.RegenerateReport()
+
+    def RegenerateReport(self):
+        self.heading = self._generate_heading(self.report_attrs)
+        output = self.HTML_TMPL % dict(
+            title = saxutils.escape(self.title),
+            generator = self.generator,
+            stylesheet = self.stylesheet,
+            heading = self.heading,
+            report = self.report,
+            ending = self.ending,
+        )
+        self.stream.seek(0)
+        self.stream.truncate()
+        self.stream.write(output.encode('utf8'))
+
  
     def getReportAttributes(self, result):
         """
@@ -671,19 +716,19 @@ class HTMLTestRunner(Template_mixin):
  
  
     def generateReport(self, test, result):
-        report_attrs = self.getReportAttributes(result)
-        generator = 'HTMLTestRunner %s' % __version__
-        stylesheet = self._generate_stylesheet()
-        heading = self._generate_heading(report_attrs)
-        report = self._generate_report(result)
-        ending = self._generate_ending()
+        self.report_attrs = self.getReportAttributes(result)
+        self.generator = 'HTMLTestRunner %s' % __version__
+        self.stylesheet = self._generate_stylesheet()
+        self.heading = self._generate_heading(self.report_attrs)
+        self.report = self._generate_report(result)
+        self.ending = self._generate_ending()
         output = self.HTML_TMPL % dict(
             title = saxutils.escape(self.title),
-            generator = generator,
-            stylesheet = stylesheet,
-            heading = heading,
-            report = report,
-            ending = ending,
+            generator = self.generator,
+            stylesheet = self.stylesheet,
+            heading = self.heading,
+            report = self.report,
+            ending = self.ending,
         )
         self.stream.write(output.encode('utf8'))
  

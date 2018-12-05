@@ -4,7 +4,9 @@
 # Author:  pangjian
 from const import PLATFORMNAME, APKPATH
 from androidhelper import AndroidHelper
-import os,time
+import os,time,re
+from log import Log
+logger = Log.get_logger(__name__)
 
 PROJECTPATH = os.getcwd()
 
@@ -13,27 +15,45 @@ class AdbHelper(object):
     def __init__(self):
         pass
 
-    def getPid(self, packageName):
+    @classmethod
+    def getPid(cls, packageName):
         cmd = 'adb shell ps | findstr ' + packageName
         text = os.popen(cmd).read()
+        if len(text) == 0:
+            return False
         return text.split()[1]
 
-    def getUid(self, pid):
+    @classmethod
+    def getUid(cls, pid):
+        if pid is False:
+            return False
         cmd = 'adb shell cat /proc/%s/status'%(pid,)
+
         text = os.popen(cmd).readlines()
+        if len(text) == 0:
+            return False
         for i in text:
             if i.find('Uid') >=0:
                 return i.split()[1]
 
-        return None
+        return False
 
-    def getDataUsage(self, packageName):
+    @classmethod
+    def getDataUsage(cls, packageName):
         rx_bytes = 0
         tx_bytes = 0
-        uid = self.getUid(self.getPid(packageName))
+        uid = cls.getUid(cls.getPid(packageName))
+        if uid is False:
+            return False
         cmd = 'adb shell cat /proc/net/xt_qtaguid/stats | findstr ' + uid
         text = os.popen(cmd).readlines()
+        if len(text) == 0:
+            return False
+
         for i in text:
+            if i == '\n':
+                continue
+            logger.info(i.split())
             rx_bytes = rx_bytes + int(i.split()[5])
             tx_bytes = tx_bytes + int(i.split()[7])
 
@@ -67,25 +87,38 @@ class AdbHelper(object):
         os.popen("adb pull /data/local/tmp/tmp.png " + os.path.join(savepath, timestamp + ".png"))
         os.popen("adb shell rm /data/local/tmp/tmp.png")
 
-    def getPssFromText(self, text):
+    @classmethod
+    def getPssFromText(cls, text):
         pattern = '( +)(TOTAL)( +)(\d+)'
         m = re.match(pattern, text)
         return m.group(4)
 
     @classmethod
     def getMemory(cls, packageName):
-        cmd = 'adb shell dumpsys meminfo' + packageName
-        text = os.peopen(cmd).readlines()
+        try:
+            cmd = 'adb shell dumpsys meminfo ' + packageName
+            text = os.popen(cmd).readlines()
+            if len(text) == 0:
+                return False
         for i in text:
             if i.find('TOTAL') >= 0:
                 return cls.getPssFromText(i)
+        except Exception as e:
+            logger.debug(str(e))
+            return False
+
+
     @classmethod
     def getCpu(cls, packageName):
+        try:
         cmd = 'adb shell top -n 1 | findstr /E ' + packageName
         text = os.popen(cmd).readlines()
         if len(text) == 0:
             return False
         return text[0].split()[2]
+        except Exception as e:
+            logger.debug(str(e))
+            return False
 
 if __name__ == '__main__':
     a =AdbHelper()
