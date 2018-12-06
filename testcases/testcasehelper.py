@@ -3,7 +3,7 @@
 # Date:    2018-10-18
 # Author:  pangjian
 
-import json,os,subprocess
+import json,os,subprocess,inspect
 from appium import webdriver
 from log import Log
 from const import PICPATH
@@ -34,8 +34,8 @@ def initLogcat():
         subprocess.Popen(cmd, shell=True, stdout=f)
 
 def capture(func):
-    logger.debug('capture')
     def wrapper(self):
+        logger.info(func)
         try:
             func(self)
         except Exception as e:

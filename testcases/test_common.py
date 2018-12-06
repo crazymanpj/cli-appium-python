@@ -27,7 +27,6 @@ class CommonTest(unittest.TestCase):
             for i in range(2):
                 if self.gmres.welcomtip:
                     self.gmres.welcomtip.click()
-            logger.info('setup end')
         except NoSuchElementException as e:
             logger.info('can not find welcome tip, skip')
             return True

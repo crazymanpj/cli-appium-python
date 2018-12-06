@@ -53,7 +53,7 @@ class AdbHelper(object):
         for i in text:
             if i == '\n':
                 continue
-            logger.info(i.split())
+            logger.debug(i.split())
             rx_bytes = rx_bytes + int(i.split()[5])
             tx_bytes = tx_bytes + int(i.split()[7])
 

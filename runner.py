@@ -33,7 +33,7 @@ class Runner(object):
             logger.warn('hight android system, use uiautomator2')
             desired_caps['automationName'] = 'uiautomator2'
 
-        logger.info(desired_caps)
+        logger.debug(desired_caps)
         with open('config.json', 'w') as f:
             json.dump(desired_caps, f)
 
@@ -47,25 +47,17 @@ class Runner(object):
         s = Server(isnoreset=isnoreset)
         s.start()
         desired_caps = self.inittest()
-        logger.info('ispertest: ' + str(ispertest))
+        logger.debug('ispertest: ' + str(ispertest))
         if ispertest:
             pertest = PerTest(PROCESSUINAME)
             pertest.startMon()
-            logger.info('per end')
 
         discover = unittest.defaultTestLoader.discover(testpath, pattern='test*.py')
 
-
-        logger.info('pertest.cpu_aver: ' + pertest.cpu_aver)
         with open(reportfile, 'wb') as f:
-            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='测试报告', description='用例执行情况：', cpuaver=pertest.cpu_aver)
+            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='测试报告', description='用例执行情况：')
             runner.run(discover)
-
-        # with open('UnitestTextReport.txt', 'w', encoding='utf-8') as f:
-        #     runner = unittest.TextTestRunner(stream=f, verbosity=2)
-        #     runner.run(discover)
-
-
+            runner.addPerdataToReport(pertest.cpu_aver, pertest.mem_aver, pertest.rx_total_mb, pertest.tx_total_mb)
 
         s.stop()
 

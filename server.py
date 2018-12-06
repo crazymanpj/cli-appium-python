@@ -22,7 +22,6 @@ class Server(object):
             self.isnoreset = '--no-reset'
 
     def start(self):
-        logger.info('启动appium服务')
         cmd = "appium -a %s -p %s -U %s --session-override %s"%(self.IP, self.port, self.deviceId, self.isnoreset)
         logger.debug(cmd)
 
@@ -43,11 +42,9 @@ class Server(object):
         s.kill()
 
     def stop(self):
-        print('stop')
         #windows
         self.killNodePro()
         if self.subp is not None:
-            logger.info('关闭appium服务')
             self.subp.kill()
             logger.info('关闭appium服务成功')
 
