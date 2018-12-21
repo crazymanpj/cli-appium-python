@@ -9,17 +9,19 @@ from server import Server
 from log import Log
 import HTMLTestRunner
 from per import PerTest
-from const import PROCESSUINAME
+from const import PROCESSUINAME, APKPATH
 
 logger = Log.get_logger(__name__)
 PROJECTPATH = os.getcwd()
 
 class Runner(object):
 
-    def __init__(self, testpath):
-        self.testpath = testpath
+    #argv: testset or testpath
+    def __init__(self, testset):
+        self.testpath = testset
         # logger.info(testpath)
         self.my_adbhelper = AdbHelper()
+        self.exception_define = 'Runner() run test Error'
 
     def inittest(self):
         desired_caps = {}
@@ -39,7 +41,7 @@ class Runner(object):
 
     def runTestCase(self, isnoreset=False, ispertest = False):
         apkpath = self.getTestApk()
-        testpath = os.path.join(PROJECTPATH, 'testcases')
+        # testpath = os.path.join(PROJECTPATH, 'testcases')
         logger.info(apkpath)
         self.my_androidhelper = AndroidHelper(apkpath)
         reportfile = os.path.join(PROJECTPATH, 'report', 'report.html')
@@ -52,12 +54,14 @@ class Runner(object):
             pertest = PerTest(PROCESSUINAME)
             pertest.startMon()
 
-        discover = unittest.defaultTestLoader.discover(testpath, pattern='test*.py')
+        logger.debug(self.testpath)
+        discover = unittest.defaultTestLoader.discover(self.testpath, pattern='test*.py')
 
         with open(reportfile, 'wb') as f:
-            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='²âÊÔ±¨¸æ', description='ÓÃÀýÖ´ÐÐÇé¿ö£º')
+            runner = HTMLTestRunner.HTMLTestRunner(stream=f, title='æµ‹è¯•æŠ¥å‘Š', description='ç”¨ä¾‹æ‰§è¡Œæƒ…å†µï¼š')
             runner.run(discover)
-            runner.addPerdataToReport(pertest.cpu_aver, pertest.mem_aver, pertest.rx_total_mb, pertest.tx_total_mb)
+            if ispertest:
+                runner.addPerdataToReport(pertest.cpu_aver, pertest.mem_aver, pertest.rx_total_mb, pertest.tx_total_mb)
 
         s.stop()
 
@@ -65,8 +69,8 @@ class Runner(object):
         pass
 
     def getTestApk(self):
-        if os.path.isdir(self.testpath):
-            for root, dirs, files in os.walk(self.testpath):
+        if os.path.isdir(APKPATH):
+            for root, dirs, files in os.walk(APKPATH):
                 return os.path.join(root, files[0])
 
     def isHigherAndroid(self, version):

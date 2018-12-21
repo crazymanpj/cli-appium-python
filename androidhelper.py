@@ -3,6 +3,9 @@
 # Date:    2018-10-23
 # Author:  pangjian
 import os, subprocess, re
+from log import Log
+logger = Log.get_logger(__name__)
+from lib.mystr import getstrencodingtype
 
 PROJECTPATH = os.getcwd()
 
@@ -23,7 +26,12 @@ class AndroidHelper(object):
         cmd = aaptPath + " d badging" +" " + self.apkfilepath
         ret = subprocess.Popen(cmd, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = False)
         cmdret = ret.stdout.read()
-        cmdret = cmdret.decode('gbk')
+        logger.debug(cmdret)
+        logger.debug(getstrencodingtype(cmdret))
+        try:
+            cmdret = cmdret.decode(getstrencodingtype(cmdret))
+        except Exception as e:
+            logger.error(str(e))
 
         packageInfos = cmdret.splitlines()
         for i in packageInfos:

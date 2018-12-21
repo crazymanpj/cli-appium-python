@@ -5,8 +5,8 @@
 import unittest,os,time
 from appium_util import AppiumUtil
 from gmres import GMRes
-from testcases import gamemaster_util
-from testcases.testcasehelper import initAppium, verifyElement, initLogcat, capture
+from testcases.gamemaster import gamemaster_util
+from testcasehelper import initAppium, verifyElement, initLogcat, capture
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import NoSuchElementException
 from log import Log
