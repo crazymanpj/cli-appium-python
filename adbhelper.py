@@ -2,7 +2,7 @@
 # encoding=utf-8
 # Date:    2018-10-23
 # Author:  pangjian
-from const import PLATFORMNAME, APKPATH
+from const import PLATFORMNAME, APKPATH, SYSTEM
 from androidhelper import AndroidHelper
 import os,time,re
 from log import Log
@@ -17,7 +17,12 @@ class AdbHelper(object):
 
     @classmethod
     def getPid(cls, packageName):
-        cmd = 'adb shell ps | findstr ' + packageName
+        if SYSTEM == 'Windows':
+            cmd = 'adb shell ps | findstr ' + packageName
+        elif SYSTEM == 'Linux':
+            cmd = 'adb shell ps | grep ' + packageName
+        else:
+            return False
         text = os.popen(cmd).read()
         if len(text) == 0:
             return False
@@ -45,7 +50,12 @@ class AdbHelper(object):
         uid = cls.getUid(cls.getPid(packageName))
         if uid is False:
             return False
-        cmd = 'adb shell cat /proc/net/xt_qtaguid/stats | findstr ' + uid
+        if SYSTEM == 'Windows':
+            cmd = 'adb shell cat /proc/net/xt_qtaguid/stats | findstr ' + uid
+        elif SYSTEM == 'Linux':
+            cmd = 'adb shell cat /proc/net/xt_qtaguid/stats | grep ' + uid
+        else:
+            return False
         text = os.popen(cmd).readlines()
         if len(text) == 0:
             return False
@@ -100,9 +110,9 @@ class AdbHelper(object):
             text = os.popen(cmd).readlines()
             if len(text) == 0:
                 return False
-        for i in text:
-            if i.find('TOTAL') >= 0:
-                return cls.getPssFromText(i)
+            for i in text:
+                if i.find('TOTAL') >= 0:
+                    return cls.getPssFromText(i)
         except Exception as e:
             logger.debug(str(e))
             return False
@@ -111,15 +121,19 @@ class AdbHelper(object):
     @classmethod
     def getCpu(cls, packageName):
         try:
-        cmd = 'adb shell top -n 1 | findstr /E ' + packageName
-        text = os.popen(cmd).readlines()
-        if len(text) == 0:
-            return False
-        return text[0].split()[2]
+            if SYSTEM == 'Windows':
+                cmd = 'adb shell top -n 1 | findstr /E ' + packageName
+            elif SYSTEM == 'Linux':
+                cmd = 'adb shell top -n 1 | grep /E ' + packageName
+            else:
+                return False
+            text = os.popen(cmd).readlines()
+            if len(text) == 0:
+                return False
+            return text[0].split()[2]
         except Exception as e:
             logger.debug(str(e))
             return False
 
 if __name__ == '__main__':
-    a =AdbHelper()
-    print(a.getPhoneResolution())
+    pass

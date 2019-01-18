@@ -7,6 +7,7 @@ import argparse,subprocess,os
 from log import Log
 from runner import Runner
 from log import Log
+import traceback
 logger = Log.get_logger(__name__)
 PROJECTPATH = os.getcwd()
 
@@ -18,6 +19,7 @@ parser.add_argument('--pertest', help='generate per data', default=False, action
 parser.add_argument('--monkeyrunner', type=str, help='run the configfile with monkeyrunner', dest='mrconfile')
 
 args = parser.parse_args()
+
 
 Log.set_log_level(args.loglevel)
 
@@ -38,6 +40,7 @@ try:
     logger.debug('start')
     if args.testset:
         r = Runner(args.testset)
-    r.runTestCase(isnoreset = args.no_reset, ispertest = args.pertest)
+        r.runTestCase(isnoreset = args.no_reset, ispertest = args.pertest)
 except Exception as e:
+    logger.info(traceback.format_exc())
     logger.error("%s exception !!!  msg: %s"%(r.exception_define, str(e)))

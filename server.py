@@ -5,8 +5,10 @@
 import subprocess,time,os,requests,time
 from adbhelper import AdbHelper
 from log import Log
+from const import SYSTEM
 
 logger = Log.get_logger(__name__)
+
 
 class Server(object):
 
@@ -36,7 +38,12 @@ class Server(object):
             self.killNodePro()
 
     def killNodePro(self):
-        cmd = 'taskkill /f /im node.exe'
+        if SYSTEM == 'Windows':
+            cmd = 'taskkill /f /im node.exe'
+        elif SYSTEM == 'Linux':
+            cmd = 'killall -9 node'
+        else:
+            return False
         s = subprocess.Popen(cmd, shell=True)
         s.wait()
         s.kill()
@@ -65,5 +72,5 @@ class Server(object):
         # self.stop()
 
 if __name__ == '__main__':
-    s = Server()
-    s.start()
+    t = ''
+    print('sfe%s'%(t))

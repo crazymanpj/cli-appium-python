@@ -104,7 +104,3 @@ class PerTest():
 
         self.rx_total_mb = str(float_decimal2((self.rx_bytes_e - self.rx_bytes_s) /1024 /1024))
         self.tx_total_mb = str(float_decimal2((self.tx_bytes_e - self.tx_bytes_s) / 1024 /1024))
-
-if __name__ == '__main__':
-    print(str(float_decimal2((1305952868 - self.rx_bytes_s) /1024 /1024)))
-    print(str(float_decimal2((self.tx_bytes_e - self.tx_bytes_s) / 1024 /1024)))
