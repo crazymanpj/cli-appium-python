@@ -44,6 +44,7 @@ class Server(object):
             cmd = 'killall -9 node'
         else:
             return False
+        logger.info(cmd)
         s = subprocess.Popen(cmd, shell=True)
         s.wait()
         s.kill()

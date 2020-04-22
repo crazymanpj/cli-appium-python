@@ -17,6 +17,7 @@ parser.add_argument('--loglevel', type=str, help='set log level', default='INFO'
 parser.add_argument('--no-reset', help='no install apk and reset', default=False, action="store_true")
 parser.add_argument('--pertest', help='generate per data', default=False, action="store_true")
 parser.add_argument('--monkeyrunner', type=str, help='run the configfile with monkeyrunner', dest='mrconfile')
+parser.add_argument('--maximmonkey', type=str, help='run maxim monkey', dest='maxim monkey by zhangzhao_lenovo')
 
 args = parser.parse_args()
 

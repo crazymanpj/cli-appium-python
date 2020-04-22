@@ -49,4 +49,4 @@ def capture(func):
 
 
 if __name__=='__main__':
-    pass
+    print(sorted([11,2,3,4,5]))

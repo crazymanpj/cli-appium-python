@@ -1,0 +1,197 @@
+[35m[Appium][39m Welcome to Appium v1.9.1
+[35m[Appium][39m Non-default server args:
+[35m[Appium][39m   address: 127.0.0.1
+[35m[Appium][39m   sessionOverride: true
+[35m[Appium][39m   udid: 26eda776
+[35m[Appium][39m Deprecated server args:
+[35m[Appium][39m   [31m-U,--udid[39m => --default-capabilities '{"udid":"26eda776"}'
+[35m[Appium][39m Default capabilities, which will be added to each request unless overridden by desired capabilities:
+[35m[Appium][39m   udid: 26eda776
+[35m[Appium][39m Appium REST http interface listener started on 127.0.0.1:4723
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
+[35m[HTTP][39m [90m{"desiredCapabilities":{"deviceName":"26eda776","appPackage":"com.cmcm.gamemaster","app":"d:\\kuaipan\\python\\cli-appium-python\\apk\\cmgamemaster_common_v10510219.apk","platformName":"Android","platformVersion":"6.0.1","appActivity":"com.cm.game.launcher.ui.main.GameMainActivity"},"capabilities":{"firstMatch":[{}],"alwaysMatch":{"appium:platformVersion":"6.0.1","platformName":"Android","appium:deviceName":"26eda776","appium:app":"d:\\kuaipan\\python\\cli-appium-python\\apk\\cmgamemaster_common_v10510219.apk","appium:appPackage":"com.cmcm.gamemaster","appium:appActivity":"com.cm.game.launcher.ui.main.GameMainActivity"}}}[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"deviceName":"26eda776","appPackage":"com.cmcm.gamemaster","app":"d:\\kuaipan\\python\\cli-appium-python\\apk\\cmgamemaster_common_v10510219.apk","platformName":"Android","platformVersion":"6.0.1","appActivity":"com.cm.game.launcher.ui.main.GameMainActivity"},null,{"firstMatch":[{}],"alwaysMatch":{"appium:platformVersion":"6.0.1","platformName":"Android","appium:deviceName":"26eda776","appium:app":"d:\\kuaipan\\python\\cli-appium-python\\apk\\cmgamemaster_common_v10510219.apk","appium:appPackage":"com.cmcm.gamemaster","appium:appActivity":"com.cm.game.launcher.ui.main.GameMainActivity"}}]
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1540893732223 (18:02:12 GMT+0800 (中国标准时间))
+[35m[BaseDriver][39m The capabilities ["udid"] are not standard capabilities and should have an extension prefix
+[35m[Appium][39m Consider setting 'automationName' capability to 'UiAutomator2' on Android >= 6, since UIAutomator framework is not maintained anymore by the OS vendor.
+[35m[Appium][39m Creating new AndroidDriver (v4.1.1) session
+[35m[Appium][39m Capabilities:
+[35m[Appium][39m   platformName: Android
+[35m[Appium][39m   platformVersion: 6.0.1
+[35m[Appium][39m   deviceName: 26eda776
+[35m[Appium][39m   app: d:\kuaipan\python\cli-appium-python\apk\cmgamemaster_common_v10510219.apk
+[35m[Appium][39m   appPackage: com.cmcm.gamemaster
+[35m[Appium][39m   appActivity: com.cm.game.launcher.ui.main.GameMainActivity
+[35m[Appium][39m   udid: 26eda776
+[debug] [35m[BaseDriver][39m W3C capabilities {"alwaysMatch":{"platformNa... and MJSONWP desired capabilities {"udid":"26eda776","deviceN... were provided
+[debug] [35m[BaseDriver][39m Creating session with W3C capabilities: {"alwaysMatch":{"platformNa...
+[35m[BaseDriver][39m Session created with session id: 66668398-8fe5-4851-8d2d-de681f36a0bb
+[35m[AndroidDriver][39m Java version is: 1.8.0_181
+[35m[ADB][39m Checking whether adb is present
+[35m[ADB][39m Found 6 'build-tools' folders under 'C:\Users\ADMIN\AppData\Local\Android\Sdk' (newest first):
+[35m[ADB][39m     C:/Users/ADMIN/AppData/Local/Android/Sdk/build-tools/28.0.2
+[35m[ADB][39m     C:/Users/ADMIN/AppData/Local/Android/Sdk/build-tools/27.0.3
+[35m[ADB][39m     C:/Users/ADMIN/AppData/Local/Android/Sdk/build-tools/25.0.2
+[35m[ADB][39m     C:/Users/ADMIN/AppData/Local/Android/Sdk/build-tools/23.0.1
+[35m[ADB][39m     C:/Users/ADMIN/AppData/Local/Android/Sdk/build-tools/22.0.1
+[35m[ADB][39m     C:/Users/ADMIN/AppData/Local/Android/Sdk/build-tools/21.1.2
+[35m[ADB][39m Using adb.exe from C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe
+[35m[AndroidDriver][39m Retrieving device list
+[debug] [35m[ADB][39m Trying to find a connected android device
+[debug] [35m[ADB][39m Getting connected devices...
+[debug] [35m[ADB][39m 1 device(s) connected
+[35m[AndroidDriver][39m Using device: 26eda776
+[debug] [35m[ADB][39m Setting device id to 26eda776
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell getprop ro.build.version.sdk'
+[debug] [35m[ADB][39m Current device property 'ro.build.version.sdk': 23
+[debug] [35m[ADB][39m Device API level: 23
+[35m[AndroidDriver][39m Consider setting 'automationName' capability to 'uiautomator2' on Android >= 6, since UIAutomator framework is not maintained anymore by the OS vendor.
+[35m[BaseDriver][39m Using local app 'd:\kuaipan\python\cli-appium-python\apk\cmgamemaster_common_v10510219.apk'
+[debug] [35m[AndroidDriver][39m Checking whether app is actually present
+[35m[AndroidDriver][39m Starting Android session
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 wait-for-device'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell echo ping'
+[debug] [35m[AndroidDriver][39m Pushing settings apk to device...
+[debug] [35m[ADB][39m Getting install status for io.appium.settings
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell pm list packages io.appium.settings'
+[35m[Appium][39m Cannot retrieve the timestamp for Appium git commit f9ee7d068e14f10729f88ebd85db802c2e8ac21a from GitHub. Original error: 403 - "{\"message\":\"API rate limit exceeded for 103.69.155.92. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://developer.github.com/v3/#rate-limiting\"}"
+[debug] [35m[ADB][39m App is installed
+[debug] [35m[ADB][39m Getting package info for 'io.appium.settings'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell dumpsys package io.appium.settings'
+[35m[ADB][39m Checking whether aapt is present
+[35m[ADB][39m Using aapt.exe from C:\Users\ADMIN\AppData\Local\Android\Sdk\build-tools\28.0.2\aapt.exe
+[debug] [35m[ADB][39m The installed 'io.appium.settings' package does not require upgrade ('2.3.0' >= '2.3.0')
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell ps'
+[debug] [35m[ADB][39m Device API level: 23
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell am start -W -n io.appium.settings/.Settings -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -f 0x10200000'
+[debug] [35m[ADB][39m Device API level: 23
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell appops set io.appium.settings android\:mock_location allow'
+[35m[AndroidDriver][39m setDeviceLanguageCountry requires language or country.
+[35m[AndroidDriver][39m Got language: 'null' and country: 'null'
+[debug] [35m[Logcat][39m Starting logcat capture
+[debug] [35m[AndroidDriver][39m Pushing unlock helper app to device...
+[debug] [35m[ADB][39m Getting install status for io.appium.unlock
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell pm list packages io.appium.unlock'
+[debug] [35m[ADB][39m App is installed
+[debug] [35m[ADB][39m Getting package info for 'io.appium.unlock'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell dumpsys package io.appium.unlock'
+[debug] [35m[ADB][39m The installed 'io.appium.unlock' package does not require upgrade ('2.0.0' >= '2.0.0')
+[35m[ADB][39m Getting device platform version
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell getprop ro.build.version.release'
+[debug] [35m[ADB][39m Current device property 'ro.build.version.release': 6.0.1
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell wm size'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell getprop ro.product.model'
+[debug] [35m[ADB][39m Current device property 'ro.product.model': SM-A7000
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell getprop ro.product.manufacturer'
+[debug] [35m[ADB][39m Current device property 'ro.product.manufacturer': samsung
+[debug] [35m[ADB][39m Getting install status for com.cmcm.gamemaster
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell pm list packages com.cmcm.gamemaster'
+[debug] [35m[ADB][39m App is installed
+[debug] [35m[ADB][39m Getting install status for com.cmcm.gamemaster
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell pm list packages com.cmcm.gamemaster'
+[debug] [35m[ADB][39m App is installed
+[debug] [35m[ADB][39m Getting package info for 'com.cmcm.gamemaster'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell dumpsys package com.cmcm.gamemaster'
+[debug] [35m[ADB][39m The installed 'com.cmcm.gamemaster' package does not require upgrade ('1.5.1' >= '1.5.1')
+[35m[AndroidDriver][39m Performing fast reset on 'com.cmcm.gamemaster'
+[debug] [35m[ADB][39m Getting install status for com.cmcm.gamemaster
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell pm list packages com.cmcm.gamemaster'
+[debug] [35m[ADB][39m App is installed
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell am force-stop com.cmcm.gamemaster'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell pm clear com.cmcm.gamemaster'
+[debug] [35m[AndroidDriver][39m Performed fast reset on the installed 'com.cmcm.gamemaster' application (stop and clear)
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell rm -rf /data/local/tmp/strings.json'
+[debug] [35m[AndroidDriver][39m Extracting strings from apk
+[debug] [35m[AndroidDriver][39m d:\kuaipan\python\cli-appium-python\apk\cmgamemaster_common_v10510219.apk
+[debug] [35m[AndroidDriver][39m null
+[debug] [35m[AndroidDriver][39m C:\Users\ADMIN\AppData\Local\Temp\com.cmcm.gamemaster
+[debug] [35m[ADB][39m Extracting strings for language: default
+[35m[ADB][39m Successfully extracted 218 strings from 'd:\kuaipan\python\cli-appium-python\apk\cmgamemaster_common_v10510219.apk' resources for '(default)' configuration
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 push C\:\\Users\\ADMIN\\AppData\\Local\\Temp\\com.cmcm.gamemaster\\strings.json /data/local/tmp'
+[debug] [35m[AndroidBootstrap][39m Watching for bootstrap disconnect
+[debug] [35m[ADB][39m Forwarding system: 4724 to device: 4724
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 forward tcp\:4724 tcp\:4724'
+[debug] [35m[UiAutomator][39m Starting UiAutomator
+[debug] [35m[UiAutomator][39m Moving to state 'starting'
+[debug] [35m[UiAutomator][39m Parsing uiautomator jar
+[debug] [35m[UiAutomator][39m Found jar name: 'AppiumBootstrap.jar'
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 push C\:\\Users\\ADMIN\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\appium-android-driver\\bootstrap\\bin\\AppiumBootstrap.jar /data/local/tmp/'
+[debug] [35m[ADB][39m Attempting to kill all uiautomator processes
+[debug] [35m[ADB][39m Getting all processes with uiautomator
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell ps'
+[35m[ADB][39m No uiautomator process found to kill, continuing...
+[debug] [35m[UiAutomator][39m Starting UIAutomator
+[debug] [35m[ADB][39m Creating ADB subprocess with args: ["-P",5037,"-s","26eda776","shell","uiautomator","runtest","AppiumBootstrap.jar","-c","io.appium.android.bootstrap.Bootstrap","-e","pkg","com.cmcm.gamemaster","-e","disableAndroidWatchers",false,"-e","acceptSslCerts",false]
+[debug] [35m[UiAutomator][39m Moving to state 'online'
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] json loading complete.
+[35m[AndroidBootstrap][39m Android bootstrap socket is now connected
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell dumpsys window'
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Registered crash watchers.
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Client connected
+[35m[AndroidDriver][39m Screen already unlocked, doing nothing
+[debug] [35m[ADB][39m Device API level: 23
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell am start -W -n com.cmcm.gamemaster/com.cm.game.launcher.ui.main.GameMainActivity -S -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -f 0x10200000'
+[35m[Appium][39m New AndroidDriver session created successfully, session 66668398-8fe5-4851-8d2d-de681f36a0bb added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1540893756669 (18:02:36 GMT+0800 (中国标准时间))
+[debug] [35m[W3C][39m Cached the protocol value 'W3C' for the new session 66668398-8fe5-4851-8d2d-de681f36a0bb
+[debug] [35m[W3C][39m Responding to client with driver.createSession() result: {"capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformName":"Android","platformVersion":"6.0.1","deviceName":"26eda776","app":"d:\\kuaipan\\python\\cli-appium-python\\apk\\cmgamemaster_common_v10510219.apk","appPackage":"com.cmcm.gamemaster","appActivity":"com.cm.game.launcher.ui.main.GameMainActivity","udid":"26eda776"},"platformName":"Android","platformVersion":"6.0.1","deviceName":"26eda776","app":"d:\\kuaipan\\python\\cli-appium-python\\apk\\cmgamemaster_common_v10510219.apk","appPackage":"com.cmcm.gamemaster","appActivity":"com.cm.game.launcher.ui.main.GameMainActivity","udid":"26eda776","deviceUDID":"26eda776","deviceScreenSize":"1080x1920","deviceModel":"SM-A7000","deviceManufacturer":"samsung"}}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m24457 ms - 950[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/66668398-8fe5-4851-8d2d-de681f36a0bb/element[39m
+[35m[HTTP][39m [90m{"using":"id","value":"com.cmcm.gamemaster.main:id/guide_submit_iv","sessionId":"66668398-8fe5-4851-8d2d-de681f36a0bb"}[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.findElement() with args: ["id","com.cmcm.gamemaster.main:id/guide_submit_iv","66668398-8fe5-4851-8d2d-de681f36a0bb"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [35m[BaseDriver][39m Waiting up to 0 ms for condition
+[debug] [35m[AndroidBootstrap][39m Sending command to android: {"cmd":"action","action":"find","params":{"strategy":"id","selector":"com.cmcm.gamemaster.main:id/guide_submit_iv","context":"","multiple":false}}
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"find","params":{"strategy":"id","selector":"com.cmcm.gamemaster.main:id/guide_submit_iv","context":"","multiple":false}}
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Got command action: find
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Finding 'com.cmcm.gamemaster.main:id/guide_submit_iv' using 'ID' with the contextId: '' multiple: false
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Using: UiSelector[INSTANCE=0, RESOURCE_ID=com.cmcm.gamemaster.main:id/guide_submit_iv]
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Failed to locate element. Clearing Accessibility cache and retrying.
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Finding 'com.cmcm.gamemaster.main:id/guide_submit_iv' using 'ID' with the contextId: '' multiple: false
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Using: UiSelector[INSTANCE=0, RESOURCE_ID=com.cmcm.gamemaster.main:id/guide_submit_iv]
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Returning result: {"status":7,"value":"No element found"}
+[debug] [35m[AndroidBootstrap][39m Received command result from bootstrap
+[debug] [35m[MJSONWP][39m Matched JSONWP error code 7 to NoSuchElementError
+[debug] [35m[W3C][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[W3C][39m     at AndroidDriver.callee$0$0$ (C:\Users\ADMIN\AppData\Roaming\npm\node_modules\appium\node_modules\appium-android-driver\lib\commands\find.js:75:11)
+[debug] [35m[W3C][39m     at tryCatch (C:\Users\ADMIN\AppData\Roaming\npm\node_modules\appium\node_modules\babel-runtime\regenerator\runtime.js:67:40)
+[debug] [35m[W3C][39m     at GeneratorFunctionPrototype.invoke [as _invoke] (C:\Users\ADMIN\AppData\Roaming\npm\node_modules\appium\node_modules\babel-runtime\regenerator\runtime.js:315:22)
+[debug] [35m[W3C][39m     at GeneratorFunctionPrototype.prototype.(anonymous function) [as throw] (C:\Users\ADMIN\AppData\Roaming\npm\node_modules\appium\node_modules\babel-runtime\regenerator\runtime.js:100:21)
+[debug] [35m[W3C][39m     at GeneratorFunctionPrototype.invoke (C:\Users\ADMIN\AppData\Roaming\npm\node_modules\appium\node_modules\babel-runtime\regenerator\runtime.js:136:37)
+[debug] [35m[W3C][39m     at <anonymous>
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/66668398-8fe5-4851-8d2d-de681f36a0bb/element [39m[33m404[39m [90m4364 ms - 1117[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/66668398-8fe5-4851-8d2d-de681f36a0bb[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.deleteSession() with args: ["66668398-8fe5-4851-8d2d-de681f36a0bb"]
+[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1540893763076 (18:02:43 GMT+0800 (中国标准时间))
+[35m[Appium][39m Removing session 66668398-8fe5-4851-8d2d-de681f36a0bb from our master session list
+[debug] [35m[AndroidDriver][39m Shutting down Android driver
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell am force-stop com.cmcm.gamemaster'
+[debug] [35m[ADB][39m Pressing the HOME button
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell input keyevent 3'
+[debug] [35m[AndroidBootstrap][39m Sending command to android: {"cmd":"shutdown"}
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"shutdown"}
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Got command of type SHUTDOWN
+[debug] [35m[AndroidBootstrap][39m [BOOTSTRAP LOG] [debug] Returning result: {"status":0,"value":"OK, shutting down"}
+[debug] [35m[AndroidBootstrap][39m Received command result from bootstrap
+[debug] [35m[UiAutomator][39m Shutting down UiAutomator
+[debug] [35m[UiAutomator][39m Moving to state 'stopping'
+[debug] [35m[UiAutomator][39m UiAutomator shut down normally
+[debug] [35m[UiAutomator][39m Moving to state 'stopped'
+[debug] [35m[ADB][39m Attempting to kill all uiautomator processes
+[debug] [35m[ADB][39m Getting all processes with uiautomator
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell ps'
+[35m[ADB][39m No uiautomator process found to kill, continuing...
+[debug] [35m[UiAutomator][39m Moving to state 'stopped'
+[debug] [35m[Logcat][39m Stopping logcat capture
+[debug] [35m[ADB][39m Running 'C:\Users\ADMIN\AppData\Local\Android\Sdk\platform-tools\adb.exe -P 5037 -s 26eda776 shell am force-stop io.appium.unlock'
+[debug] [35m[AndroidDriver][39m Not cleaning generated files. Add `clearSystemFiles` capability if wanted.
+[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1540893768268 (18:02:48 GMT+0800 (中国标准时间))
+[debug] [35m[W3C][39m Received response: null
+[debug] [35m[W3C][39m But deleting session, so not returning
+[debug] [35m[W3C][39m Responding to client with driver.deleteSession() result: null
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/66668398-8fe5-4851-8d2d-de681f36a0bb [39m[32m200[39m [90m5198 ms - 14[39m
+[35m[HTTP][39m [90m[39m
